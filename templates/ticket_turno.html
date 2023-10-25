@@ -1,0 +1,99 @@
+{% extends "base_bootstrap.html" %}
+	{% block body %}
+
+    <body id="TicketForm">
+        <header>
+            <br>
+            <img src="https://educacion.seducoahuila.gob.mx/wp-content/uploads/2022/09/logo_sedu.png" alt="Logo Secretaría de Educación">
+        </header>
+        <main>
+            <h1>Ticket de Turno</h1>
+            <form id="ContactoForm" method="post" action="/ticket-turno" onsubmit="return valida_forma();">
+                {% include "sweetalerts.html"%}
+                <div class="field">
+                    <label for="representante">Nombre completo de quien realizará el trámite:</label>
+                    <input type="text" id="representante" name="representante">
+                </div>
+                <div class="field">
+                    <label for="curp">CURP:</label>
+                    <input type="text" id="curp" name="curp">
+                </div>
+                <div class="name-container">
+                    <div class="name-field">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre">
+                    </div>
+                    <div class="name-field">
+                        <label for="paterno">Paterno:</label>
+                        <input type="text" id="paterno" name="paterno">
+                    </div>
+                    <div class="name-field">
+                        <label for="materno">Materno:</label>
+                        <input type="text" id="materno" name="materno">
+                    </div>
+                </div>
+                <div class="contact-container">
+                    <div class="contact-field">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="text" id="telefono" name="telefono">
+                    </div>
+                    <div class="contact-field">
+                        <label for="celular">Celular:</label>
+                        <input type="text" id="celular" name="celular">
+                    </div>
+                    <div class="contact-field">
+                        <label for="correo">Correo:</label>
+                        <input type="email" id="correo" name="correo">
+                    </div>
+                </div>
+    
+                <div class="field">
+                    <label for="nivel">¿Nivel al que desea ingresar o que ya cursa el alumno?</label>
+                    <select id="nivel" name="nivel">
+                        {% if lista_nivel|length !=0 %}
+                        <option value="0">Seleccione</option>
+                                    {% for nivel in lista_nivel %}
+                                            <option value="{{ nivel[0]}}">{{ nivel[1] }}</option>
+                                    {% endfor %}
+                        {% else %}
+                            <option value="0">No hay Datos</option>
+                        {% endif %}
+                    </select>
+                </div>
+    
+                <div class="field">
+                    <label for="municipio">Municipio donde desea que estudie el alumno:</label>
+                    <select id="municipio" name="municipio">
+                        {% if lista_municipio|length !=0 %}
+                        <option value="0">Seleccione</option>
+                                    {% for muni in lista_municipio %}
+                                            <option value="{{ muni[0]}}">{{ muni[1] }}</option>
+                                    {% endfor %}
+                        {% else %}
+                            <option value="0">No hay Datos</option>
+                        {% endif %}
+                    </select>
+                </div>
+    
+                <div class="field">
+                    <label for="asunto">Seleccione el asunto que va a tratar:</label>
+                    <select id="asunto" name="asunto">
+                        {% if lista_asunto|length !=0 %}
+                        <option value="0">Seleccione</option>
+                                    {% for asun in lista_asunto %}
+                                            <option value="{{ asun[0]}}">{{ asun[1] }}</option>
+                                    {% endfor %}
+                        {% else %}
+                            <option value="0">No hay Datos</option>
+                        {% endif %}
+                    </select>
+                </div>
+                
+                <div class="submit-button">
+                    <button type="submit">Generar Turno</button>
+                </div>
+            </form>
+        </main>
+    </body>
+
+    {% endblock %}

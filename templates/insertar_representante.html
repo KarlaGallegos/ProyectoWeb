@@ -1,0 +1,23 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+
+<body id="insertRepresentante">
+    <h1>Insertar Representante</h1>
+    <form method="POST" action="/insertar_representante">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label for="celular">Celular:</label>
+        <input type="text" name="celular" required><br>
+
+        <label for="telefono">Teléfono:</label>
+        <input type="text" name="telefono" required><br>
+
+        <label for="email">Email:</label>
+        <input type="text" name="email" required><br>
+
+        <input type="submit" value="Insertar">
+    </form>
+</body>
+
+{% endblock %}

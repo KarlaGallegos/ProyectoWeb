@@ -1,0 +1,13 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+<body id="eliminarRepresentante">
+    <h1>Eliminar Representante</h1>
+    <form method="POST" action="/eliminar_representante">
+        <label for="representante_id">ID del Representante a eliminar:</label>
+        <input type="text" name="representante_id" id="representante_id" required>
+        <input type="submit" value="Eliminar">
+    </form>
+    <p>ID del Representante a eliminar: <span id="representante_id_to_delete"></span></p>
+</body>
+
+{% endblock %}

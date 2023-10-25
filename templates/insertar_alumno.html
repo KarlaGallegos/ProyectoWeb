@@ -1,0 +1,25 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+
+<body id="insertAlumno">
+    <h1>Insertar Representante</h1>
+    <form method="POST" action="/insertar_alumno">
+        <label for="curp">Curp:</label>
+        <input type="text" name="curp" required><br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" required><br>
+
+        <label for="paterno">Paterno:</label>
+        <input type="text" name="paterno" required><br>
+
+        <label for="materno">Materno:</label>
+        <input type="text" name="materno" required><br>
+
+        <label for="id_nivel">ID Nivel:</label>
+        <input type="text" name="id_nivel" required><br>
+
+        <input type="submit" value="Insertar">
+    </form>
+</body>
+
+{% endblock %}

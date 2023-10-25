@@ -1,0 +1,32 @@
+{% extends "base_bootstrap.html" %}
+	{% block body %}
+
+    <body id="LoginForm">
+        <div class="container" style="margin-top: 70px;">
+            <div class="login-form">
+                <div class="main-div">
+                    <div class="logo-container">
+                        <img src="https://cdn.vectorstock.com/i/preview-1x/52/68/purple-user-icon-in-the-circle-thin-line-vector-23745268.jpg" alt="User Icon">
+                    </div>
+                    <div class="panel">
+                        <h2>Admin Login</h2>
+                        <p>Please enter your user and password</p>
+                    </div>
+                    <form id="Login" method="post" action="views/aspirante.php" onsubmit="return valida_login();">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="f_user" name="f_user" placeholder="User">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="f_pwd" name="f_pwd" placeholder="Password">
+                        </div>
+                        <div class="forgot">
+                            <a href="reset.html">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-purple">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    
+    {% endblock %}

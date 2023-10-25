@@ -1,0 +1,338 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+<body id="lista_representantes">
+    <div class="container" id="contenedor">
+        <br>
+        <br>
+        <br>
+        <h1>Listado de Representantes</h1>
+        <div class="form-group col-md-12">
+            <div align="center">
+                <button type="button" name="add" id="add" data-bs-toggle="modal" data-bs-target="#add_data_Modal" class="btn btn-primary">Agregar Representante</button>
+            </div>
+            <table id="tlista_representantes" class="display" style="width:100%">
+                <thead class="text-capitalize">
+                    <tr>
+                        <th>ID REPRESENTANTE</th>
+                        <th>NOMBRE REPRESENTANTE</th>
+                        <th>CELULAR</th>
+                        <th>TELÉFONO</th>
+                        <th>EMAIL</th>
+                        <th>Actualizar</th>
+                        <th>Ver</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for representante in lista_representantes %}
+                    <tr>
+                        <td>{{ representante[0] }}</td>
+                        <td>{{ representante[1] }}</td>
+                        <td>{{ representante[2] }}</td>
+                        <td>{{ representante[3] }}</td>
+                        <td>{{ representante[4] }}</td>
+                        <td>
+                            <button class="update btn btn-success btn-sm" id="{{"update_"~representante[0] }}" data-id="{{ representante[0] }}">Actualizar</button>
+                        </td>
+                        <td>
+                            <button class="ver btn btn-warning btn-sm" id="{{"ver_"~representante[0] }}" data-id="{{ representante[0] }}">Ver</button>
+                        </td>
+                        <td>
+                            <button class="delete btn btn-danger btn-sm" id="{{"del_"~representante[0] }}" data-id="{{ representante[0] }}">Eliminar</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>ID REPRESENTANTE</th>
+                        <th>NOMBRE REPRESENTANTE</th>
+                        <th>CELULAR</th>
+                        <th>TELÉFONO</th>
+                        <th>EMAIL</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div> <!--end form-group col-md-12-->
+    </div> <!--end container-->
+     <!-- Modal para agregar representantes -->
+     <div id="add_data_Modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <legend class="text-center header">
+                        <h4 class="modal-title">Agregar Representante</h4>
+                    </legend>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="employee_detail">
+                    <form method="post" id="insert_form">
+                        <label>Nombre del Representante:</label>
+                        <input type="text" name="f_nombre" id="f_nombre" class="form-control" />
+                        <br />
+                        <label>Celular:</label>
+                        <input type="text" name="f_celular" id="f_celular" class="form-control" />
+                        <br />
+                        <label>Teléfono:</label>
+                        <input type="text" name="f_telefono" id="f_telefono" class="form-control" />
+                        <br />
+                        <label>Correo Electrónico:</label>
+                        <input type="text" name="f_email" id="f_email" class="form-control" />
+                        <br />
+                        <input type="submit" name="insert" id="insert" value="Insertar" class="btn btn-success" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulario para actualizar representantes -->
+    <div id="update_data_form" style="display: none;">
+        <div class="container">
+            <h2>Actualizar Representante</h2>
+            <form method="POST" id="update_form">
+                <!-- Agrega los campos de actualización aquí usando WTForms o HTML según tus necesidades -->
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.3.3/js/dataTables.select.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.1.1/js/dataTables.dateTime.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            if ($('#tlista_representantes').length) {
+                $('#tlista_representantes tfoot th').not(":eq(5),:eq(6),:eq(7)").each(function () {
+                    var title = $('#tlista_representantes thead th').eq($(this).index()).text();
+                    $(this).html('<input type="text" placeholder="Filtrar ' + title + '" />');
+                });
+
+                var table = $('#tlista_representantes').DataTable({
+                    dom: 'Blfrtip',
+                    buttons: [{
+                            extend: 'excelHtml5',
+                            messageTop: 'Listado de Representantes',
+                            text: "Exportar Excel",
+                            title: "Listado de Representantes",
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            text: "Exportar CSV",
+                            title: "Listado de Representantes",
+                            messageTop: 'Listado de Representantes',
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            title: 'Listado de Representantes'
+                        }
+                    ],
+                    responsive: true,
+                    "language": {
+                        "search": "Filtro de Registros:",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sInfo": "Mostrando del (_START_ al _END_) de un total de _TOTAL_ registros",
+                        "oPaginate": {
+                            "sPrevious": "Anterior",
+                            "sNext": "Siguiente"
+                        }
+                    }
+                });
+
+                table.columns().eq(0).each(function (colIdx) {
+                    if (colIdx == 5 || colIdx == 6 || colIdx == 7) return;
+
+                    $('input', $('tfoot th')[colIdx]).on('keyup change', function () {
+                        table.column(colIdx).search(this.value).draw();
+                    });
+                });
+            }
+
+            $('#insert_form').submit(function (e) {
+                e.preventDefault();
+                var id = $('#representante_id').val();
+                var nombre = $('#f_nombre').val();
+                var celular = $('#f_celular').val();
+                var telefono = $('#f_telefono').val();
+                var email = $('#f_email').val();
+            
+                var representanteData = {
+                    id: id,
+                    nombre: nombre,
+                    celular: celular,
+                    telefono: telefono,
+                    email: email
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/insertar_representante',
+                    contentType: 'application/json',
+                    data: JSON.stringify(representanteData),
+                    success: function (data) {
+                        if (data.resultado === 'success') {
+                            // La inserción fue exitosa, puedes tomar medidas apropiadas, como limpiar el formulario
+                            $('#insert_form')[0].reset();
+                            $('#add_data_Modal').modal('hide');
+                            // También puedes actualizar la tabla o realizar cualquier otra acción necesaria
+                        } else {
+                            // La inserción falló, puedes mostrar un mensaje de error o realizar otras acciones de manejo de errores
+                            console.error('Error en la inserción: ' + data.resultado);
+                        }
+                    },
+                    error: function (error) {
+                        // Manejar errores si la solicitud AJAX falla
+                        console.error(error);
+                    }
+                });
+            });
+            $('#tlista_representantes tbody').on('click', '.delete', function () {
+                var deleteid = $(this).data('id');
+                bootbox.confirm("¿Deseas realmente borrar el registro?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/representantes/eliminar/' + deleteid,
+                            success: function (data) {
+                                if (data.resultado === 'success') {
+                                    alert("Eliminación del representante ID: " + deleteid);
+                                    // También puedes actualizar la tabla o realizar cualquier otra acción necesaria
+                                } else {
+                                    // Manejar el caso en que la eliminación falló
+                                    console.error('Error en la eliminación: ' + data.resultado);
+                                }
+                            },
+                            error: function (error) {
+                                // Manejar errores si la solicitud AJAX falla
+                                console.error(error);
+                            }
+                        });
+                    } else {
+                        bootbox.alert('Registro No Fue Eliminado.');
+                    }
+                });
+            });
+            $('#tlista_representantes tbody').on('click', '.ver', function () {
+                var representante_id = $(this).data('id');
+                if (representante_id != '') {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/obtener_representante_por_id/' + representante_id,
+                        success: function (data) {
+                            // Rellenar el modal con los detalles del representante
+                            $('#f_nombre').text(data.representante.nombre_representante);
+                            $('#fcelular').text(data.representante.celular);
+                            $('#f_telefono').text(data.representante.telefono);
+                            $('#f_email').text(data.representante.email);
+                            $('#dataModal').modal('show');
+                        },
+                        error: function (error) {
+                            bootbox.alert('3312.');
+                            console.error(error);
+                        }
+                    });
+                } else {
+                    bootbox.alert('No se proporcionó un ID de representante válido.');
+                }
+            });
+            $('#update').click(function () {
+                $('#update_data_form').toggle(); // Mostrar u ocultar el formulario de actualización
+            });
+            $('#tlista_representantes tbody').on('click', '.update', function () {
+                var update_id = $(this).data('id');
+                
+                // Aquí puedes obtener los nuevos valores del formulario de actualización
+                var nuevoNombre = $('#f_nombre').val();
+                var nuevoCelular = $('#f_celular').val();
+                var nuevoTelefono = $('#f_telefono').val();
+                var nuevoEmail = $('#f_email').val();
+                
+                var representanteData = {
+                    nombre: nuevoNombre,
+                    celular: nuevoCelular,
+                    telefono: nuevoTelefono,
+                    email: nuevoEmail
+                };
+
+                $.ajax({
+                    type: 'PUT',
+                    url: '/actualizar_representante/' + update_id,
+                    contentType: 'application/json',
+                    data: JSON.stringify(representanteData),
+                    success: function (data) {
+                        if (data.resultado === 'success') {
+                            alert("Actualización del representante ID: " + update_id);
+                            // También puedes actualizar la tabla o realizar cualquier otra acción necesaria
+                        } else {
+                            // Manejar el caso en que la actualización falló
+                            console.error('Error en la actualización: ' + data.resultado);
+                        }
+                    },
+                    error: function (error) {
+                        // Manejar errores si la solicitud AJAX falla
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+<div id="dataModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <legend class="text-center header">
+                    <h4 class="modal-title">Detalles de Representante</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </legend>
+            </div>
+            <div class="modal-body" id="employee_detail">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal para agregar y actualizar -->
+<div id="ver_data_Modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <legend class="text-center header">
+                    <h4 class="modal-title"></h4>
+                </legend>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="ver_form">
+                    <label>Nombre del Representante:</label>
+                    <input type="text" name="f_nombre" id="f_nombre" class="form-control" />
+                    <br />
+                    <label>Celular:</label>
+                    <input type="text" name="f_celular" id="f_celular" class="form-control" />
+                    <br />
+                    <label>Teléfono:</label>
+                    <input type="text" name="f_telefono" id="f_telefono" class="form-control" />
+                    <br />
+                    <label>Correo Electrónico:</label>
+                    <input type="text" name="f_email" id="f_email" class="form-control" />
+                    <br />
+                    <input type="hidden" name="representante_id" id="representante_id" readonly="true" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

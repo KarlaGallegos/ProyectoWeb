@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	  <meta charset="UTF-8">
+	  <meta name="description" content="Web Class">
+	  <meta name="keywords" content="HTML, CSS, JavaScript, Python, Flask, Jquery">
+	  <meta name="author" content="Karla">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ticket de Turno</title>
+	<link rel="shorcut icon" type="image/png"  href="{{ url_for('static',filename='img/logo_favicon.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom-buttons.css') }}">
+   <!-- <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='css/bootstrap.css') }}">-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+   <!--<link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='css/sweetalert2.min.css') }}">-->
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='css/index.css') }}">
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='css/style.css') }}">
+
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='datatables/DataTables-1.13.6/css/jquery.dataTables.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='datatables/Buttons-2.4.2/css/buttons.dataTables.min.css') }}"/>
+    <link rel="stylesheet" type="text/css"  href="{{ url_for('static',filename='datatables/Responsive-2.5.0/css/responsive.dataTables.min.css') }}"/>
+
+    <!-- Sweet alert Js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Jquery -->
+    <script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+
+  </head>
+<body>
+	<header class="main-head">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="btn btn-outline-info" href={{ url_for('add_ticket') }}>Registro</a>
+    <a class="btn btn-outline-info" href="#" style="margin-left: 5px">Buscar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample04">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href={{ url_for('index')}}>Login</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ajustes</a>
+          <div class="dropdown-menu drop-ajustes" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href="lista_aspirantes.php">Cambios Registro</a>
+          </div>
+        </li>
+
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Representante</a>
+          <div class="dropdown-menu drop-catalogo" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href={{ url_for('lista_representantes')}}>Lista de Representantes</a>
+            <a class="dropdown-item" href={{ url_for('insertar_representante')}}>Insertar</a>
+            <a class="dropdown-item" href={{ url_for('eliminar_representante')}}>Eliminar</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alumno</a>
+          <div class="dropdown-menu drop-catalogo" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href={{ url_for('lista_alumnos')}}>Lista de Alumnos</a>
+            <a class="dropdown-item" href={{ url_for('insertar_alumno')}}>Insertar</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ticket de Turno</a>
+          <div class="dropdown-menu drop-catalogo" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href={{ url_for('lista_tickets')}}>Lista de Tickets</a>
+            <a class="dropdown-item" href={{ url_for('insertar_ticket')}}>Insertar</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo strtoupper($_SESSION['usuario']);?></a>
+          <div class="dropdown-menu drop-catalogo" aria-labelledby="dropdown04">
+            <a class="dropdown-item" href="cerrar_sesion.php">Cerrar sesión</a>
+          </div>
+        </li>
+       </ul>
+    </div>
+</nav>
+	</header>
+	{% block body %}
+	{% endblock %}
+    <script src="{{url_for('static', filename='js/jquery-3.4.1.js')}}"></script>
+    <script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{url_for('static', filename='js/bootbox/bootbox.js')}}"></script>
+    <script src="{{url_for('static', filename='js/validation.js')}}"></script>
+  
+    <script src="{{url_for('static', filename='datatables/DataTables-1.13.6/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/Buttons-2.4.2/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/Buttons-2.4.2/js/buttons.html5.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/Buttons-2.4.2/js/buttons.print.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/Responsive-2.5.0/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/JSZip-3.10.1/jszip.min.js')}}"></script>
+    <script src="{{url_for('static', filename='datatables/pdfmake-0.2.7/pdfmake.min.js')}}"></script>
+
+</body>
+</html>

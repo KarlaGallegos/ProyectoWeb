@@ -1,0 +1,152 @@
+/* Estilos generales */
+body#TicketForm {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+}
+
+header img {
+    max-width: 80px;
+}
+
+main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+label {
+    font-size: 14px;
+    display: block;
+    font-weight: bolder;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Media Queries para responsive */
+@media screen and (max-width: 768px) {
+    body#TicketForm {
+        background-color: #e0c1fa;
+    }
+    main {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    body#TicketForm {
+        background-color: #c18eeb;
+    }
+    h1 {
+        font-size: 20px;
+    }
+}
+
+
+/* Nuevos estilos para los campos de nombres */
+.name-container {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.name-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.name-field label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.name-field input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para el campo de CURP */
+.field#curp {
+    margin-bottom: 20px;
+}
+
+/* Estilo para los campos de contacto */
+.contact-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.contact-field {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.contact-field label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.contact-field input[type="text"],
+.contact-field input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Estilo para el campo de nivel, municipio y asunto */
+.field#nivel,
+.field#municipio,
+.field#asunto {
+    margin-bottom: 30px;
+}
+
+/* Estilo para el botón de submit */
+.submit-button {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.submit-button button {
+    background-color: #8d42f5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-button button:hover {
+    background-color: #6c42f5;
+}

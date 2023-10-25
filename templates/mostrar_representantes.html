@@ -1,0 +1,29 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+<body id="mostrarReprsentantes">
+    <h1>Lista de Representantes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Celular</th>
+                <th>Telefono</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for representante in representantes %}
+                <tr>
+                    <td>{{ representante[0] }}</td>
+                    <td>{{ representante[1] }}</td>
+                    <td>{{ representante[2] }}</td>
+                    <td>{{ representante[3] }}</td>
+                    <td>{{ representante[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+{% endblock %}

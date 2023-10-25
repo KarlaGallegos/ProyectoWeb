@@ -1,0 +1,27 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+
+<body id="insertTicket">
+    <h1>Insertar Representante</h1>
+    <form method="POST" action="/insertar_ticket">
+        <label for="id_municipio">ID municipio:</label>
+        <input type="text" name="id_municipio" required><br>
+
+
+        <label for="nombre_representante">Nombre representante:</label>
+        <input type="text" name="nombre_representante" required><br>
+
+        <label for="curp_alumno">Curp alumno:</label>
+        <input type="text" name="curp_alumno" required><br>
+
+        <label for="id_asunto">ID Asunto:</label>
+        <input type="text" name="id_asunto" required><br>
+
+        <label for="id_estatus">ID Estatus:</label>
+        <input type="text" name="id_estatus" required><br>
+
+        <input type="submit" value="Insertar">
+    </form>
+</body>
+
+{% endblock %}

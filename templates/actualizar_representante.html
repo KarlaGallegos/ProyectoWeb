@@ -1,0 +1,25 @@
+{% extends "base_bootstrap.html" %}
+{% block body %}
+<body id="actualizarRepresentante">
+    <h1>Actualizar Representante</h1>
+    <form method="POST">
+        <label for="id">ID del Representante:</label>
+        <input type="text" name="id" id="id" required>
+        <br>
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" id="nombre" required>
+        <br>
+        <label for="celular">Celular:</label>
+        <input type="text" name="celular" id="celular" required>
+        <br>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" name="telefono" id="telefono" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email" required>
+        <br>
+        <input type="submit" name="update" value="Actualizar">
+    </form>
+</body>
+</html>
+{% endblock %}
